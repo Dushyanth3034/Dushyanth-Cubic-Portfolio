@@ -35,15 +35,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function () {
-            // Replace "YOUR_PUBLIC_KEY" with your actual EmailJS Public Key
-            emailjs.init({
-                publicKey: "VpLGOSsSIQN26ucqH",
-            });
-        })();
-    </script>
     <style>
         *,
         *::before,
@@ -99,46 +90,6 @@
             background: var(--bg);
             color: var(--text);
             overflow-x: hidden;
-            cursor: none;
-        }
-
-        /* ── CURSOR ── */
-        #cur {
-            width: 36px;
-            height: 36px;
-            border: 2px solid var(--yellow);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width .2s, height .2s, border-color .2s;
-            mix-blend-mode: difference;
-        }
-
-        #cur-dot {
-            width: 5px;
-            height: 5px;
-            background: var(--yellow);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-        }
-
-        body:has(a:hover) #cur,
-        body:has(button:hover) #cur {
-            width: 52px;
-            height: 52px;
-            border-color: var(--orange);
-        }
-
-        a,
-        button,
-        [onclick],
-        [role="button"] {
-            cursor: none;
         }
 
         /* keep grab cursor for draggable cube */
@@ -302,11 +253,14 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 80px;
-            padding: 0 60px;
+            justify-content: flex-start;
+            gap: clamp(110px, 10vw, 175px);
+            padding: 100px 60px 40px 60px;
+            max-width: 1440px;
+            margin: 0 auto;
             overflow: hidden;
             z-index: 1;
+            width: 100%;
         }
 
         .hero-bg-grid {
@@ -323,7 +277,8 @@
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 540px;
+            max-width: 580px;
+            flex: 1;
         }
 
         .badge {
@@ -445,6 +400,45 @@
             color: var(--yellow);
         }
 
+        .hero-socials {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .hero-social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--dim);
+            font-size: 0.9rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            padding: 7px 14px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-social-link:hover {
+            color: var(--yellow);
+            border-color: rgba(255, 213, 0, 0.35);
+            background: rgba(255, 213, 0, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .hero-social-link svg {
+            transition: stroke 0.25s ease;
+        }
+
+        .hero-social-link:hover svg {
+            stroke: var(--yellow);
+        }
+
         /* ── CUBE WRAPPER ── */
         .cube-wrapper {
             position: relative;
@@ -480,9 +474,9 @@
 
         /* ── 3D RUBIK'S CUBE ── */
         .cube-viewport {
-            width: 240px;
-            height: 240px;
-            perspective: 960px;
+            width: 340px;
+            height: 340px;
+            perspective: 1100px;
             perspective-origin: 50% 50%;
             display: flex;
             align-items: center;
@@ -505,18 +499,18 @@
         /* Each small cubie */
         .cubie {
             position: absolute;
-            width: 66px;
-            height: 66px;
-            margin: -33px 0 0 -33px;
+            width: 82px;
+            height: 82px;
+            margin: -41px 0 0 -41px;
             transform-style: preserve-3d;
         }
 
         .cubie-face {
             position: absolute;
-            width: 66px;
-            height: 66px;
-            border-radius: 9px;
-            border: 3px solid #050505;
+            width: 82px;
+            height: 82px;
+            border-radius: 11px;
+            border: 3.5px solid #050505;
             backface-visibility: visible;
         }
 
@@ -793,6 +787,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center 20%;
         }
 
         .about-photo:hover {
@@ -852,6 +847,7 @@
 
 
         /* ── SKILLS ── */
+        /* ── SKILLS ── */
         #skills {
             background: var(--bg);
         }
@@ -859,21 +855,24 @@
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 26px;
-            max-width: 1100px;
+            gap: 24px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .skill-card {
             background: rgba(255, 255, 255, .02);
-            border: none;
+            border: 1px solid rgba(255, 255, 255, .05);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-radius: 22px;
-            padding: 36px 22px;
+            border-radius: 20px;
+            padding: 28px 16px;
             text-align: center;
-            transition: transform .35s, box-shadow .35s;
+            transition: transform .35s, box-shadow .35s, border-color .35s;
             overflow: hidden;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .skill-card::before {
@@ -886,48 +885,73 @@
         }
 
         .skill-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             box-shadow: var(--sh, 0 20px 50px rgba(0, 0, 0, 0.4));
+            border-color: rgba(255, 255, 255, .15);
         }
 
         .skill-card:hover::before {
             opacity: 1;
         }
 
-        .sk-html {
+        .sk-frontend {
             --bc: var(--orange);
-            --sh: 0 20px 60px rgba(255, 88, 0, .15);
-            --c: rgba(255, 88, 0, .1)
+            --sh: 0 20px 60px rgba(255, 88, 0, .18);
+            --c: rgba(255, 88, 0, .12);
         }
 
-        .sk-css {
+        .sk-backend {
             --bc: var(--blue);
-            --sh: 0 20px 60px rgba(0, 81, 162, .15);
-            --c: rgba(0, 81, 162, .1)
+            --sh: 0 20px 60px rgba(0, 81, 162, .18);
+            --c: rgba(0, 81, 162, .12);
         }
 
-        .sk-js {
-            --bc: var(--yellow);
-            --sh: 0 20px 60px rgba(255, 213, 0, .12);
-            --c: rgba(255, 213, 0, .07)
-        }
-
-        .sk-py {
+        .sk-databases {
             --bc: var(--green);
-            --sh: 0 20px 60px rgba(0, 155, 72, .15);
-            --c: rgba(0, 155, 72, .1)
+            --sh: 0 20px 60px rgba(0, 155, 72, .18);
+            --c: rgba(0, 155, 72, .12);
+        }
+
+        .sk-programming {
+            --bc: var(--yellow);
+            --sh: 0 20px 60px rgba(255, 213, 0, .18);
+            --c: rgba(255, 213, 0, .12);
+        }
+
+        .sk-fullstack {
+            --bc: var(--red);
+            --sh: 0 20px 60px rgba(255, 59, 48, .18);
+            --c: rgba(255, 59, 48, .12);
+        }
+
+        .sk-devtools {
+            --bc: #a855f7;
+            --sh: 0 20px 60px rgba(168, 85, 247, .18);
+            --c: rgba(168, 85, 247, .12);
+        }
+
+        .sk-deployment {
+            --bc: #06b6d4;
+            --sh: 0 20px 60px rgba(6, 182, 212, .18);
+            --c: rgba(6, 182, 212, .12);
+        }
+
+        .sk-additional {
+            --bc: #64748b;
+            --sh: 0 20px 60px rgba(100, 116, 139, .18);
+            --c: rgba(100, 116, 139, .12);
         }
 
         .sk-scene {
-            width: 72px;
-            height: 72px;
-            margin: 0 auto 22px;
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px;
             perspective: 180px;
         }
 
         .sk-cube {
-            width: 72px;
-            height: 72px;
+            width: 64px;
+            height: 64px;
             position: relative;
             transform-style: preserve-3d;
             animation: skSpin 7s linear infinite;
@@ -945,87 +969,69 @@
 
         .sf {
             position: absolute;
-            width: 72px;
-            height: 72px;
-            border: 3px solid rgba(0, 0, 0, .5);
+            width: 64px;
+            height: 64px;
+            border: 2px solid rgba(0, 0, 0, .4);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
 
         .sf.f {
-            transform: translateZ(36px)
+            transform: translateZ(32px)
         }
 
         .sf.b {
-            transform: rotateY(180deg) translateZ(36px)
+            transform: rotateY(180deg) translateZ(32px)
         }
 
         .sf.l {
-            transform: rotateY(-90deg) translateZ(36px)
+            transform: rotateY(-90deg) translateZ(32px)
         }
 
         .sf.r {
-            transform: rotateY(90deg) translateZ(36px)
+            transform: rotateY(90deg) translateZ(32px)
         }
 
         .sf.t {
-            transform: rotateX(90deg) translateZ(36px)
+            transform: rotateX(90deg) translateZ(32px)
         }
 
         .sf.d {
-            transform: rotateX(-90deg) translateZ(36px)
+            transform: rotateX(-90deg) translateZ(32px)
         }
 
         .sk-name {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 10px;
         }
 
-        .sk-desc {
-            font-size: .87rem;
-            color: var(--dim);
-            margin-bottom: 18px;
+        .sk-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 4px;
         }
 
-        .bar-wrap {
-            background: rgba(255, 255, 255, .08);
-            border-radius: 100px;
-            height: 5px;
-            overflow: hidden;
-        }
-
-        .bar {
-            height: 100%;
-            border-radius: 100px;
-            width: 0;
-            transition: width 1.6s ease;
-        }
-
-        .sk-html .bar {
-            background: linear-gradient(90deg, var(--orange), var(--red))
-        }
-
-        .sk-css .bar {
-            background: linear-gradient(90deg, #0051A2, #00b4d8)
-        }
-
-        .sk-js .bar {
-            background: linear-gradient(90deg, #FFD500, #ffd000cc)
-        }
-
-        .sk-py .bar {
-            background: linear-gradient(90deg, var(--green), #4CAF50)
-        }
-
-        .bar-pct {
-            font-size: .8rem;
-            color: var(--dim);
-            margin-top: 7px;
-            text-align: right;
+        .sk-tag {
+            font-size: 0.74rem;
             font-family: 'JetBrains Mono', monospace;
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .08);
+            color: var(--text);
+            transition: all .2s ease;
+            line-height: 1.3;
+        }
+
+        .skill-card:hover .sk-tag {
+            border-color: var(--bc);
+            color: #ffffff;
+            background: var(--c);
         }
 
         /* ── PROJECTS ── */
@@ -1043,7 +1049,7 @@
 
         .proj {
             perspective: 1000px;
-            height: 310px;
+            height: 330px;
         }
 
         .proj-inner {
@@ -1236,7 +1242,214 @@
 
         .f-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 40px rgba(255, 88, 0, .5);
+        /* ── CERTIFICATIONS & TRAINING ── */
+        #certificates {
+            background: var(--bg2);
+        }
+
+        /* ── CERTIFICATIONS & TRAINING ── */
+        #certificates {
+            background: var(--bg2);
+            position: relative;
+        }
+
+        .cert-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 22px;
+            padding: 34px 32px;
+            transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
+            transition: opacity 0.4s ease;
+        }
+
+        .cert-card:hover::before {
+            opacity: 1;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 213, 0, 0.25);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+        }
+
+        .cert-featured {
+            border: 1px solid rgba(255, 88, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255, 88, 0, 0.06) 0%, rgba(255, 213, 0, 0.02) 50%, rgba(255, 255, 255, 0.01) 100%);
+            box-shadow: 0 12px 35px rgba(255, 88, 0, 0.08);
+        }
+
+        .cert-featured:hover {
+            border-color: var(--orange);
+            box-shadow: 0 20px 50px rgba(255, 88, 0, 0.22);
+        }
+
+        .cert-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .cert-icon-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(255, 88, 0, 0.12);
+            border: 1px solid rgba(255, 88, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--orange);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .cert-card:hover .cert-icon-wrap {
+            transform: scale(1.08);
+            background: rgba(255, 88, 0, 0.2);
+        }
+
+        .cert-icon-wrap.ai {
+            background: rgba(0, 81, 162, 0.15);
+            border-color: rgba(0, 81, 162, 0.3);
+            color: #38bdf8;
+        }
+
+        .cert-card:hover .cert-icon-wrap.ai {
+            background: rgba(0, 81, 162, 0.25);
+        }
+
+        .cert-icon-wrap.analytics {
+            background: rgba(0, 155, 72, 0.15);
+            border-color: rgba(0, 155, 72, 0.3);
+            color: #4ade80;
+        }
+
+        .cert-card:hover .cert-icon-wrap.analytics {
+            background: rgba(0, 155, 72, 0.25);
+        }
+
+        .cert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--orange);
+            background: rgba(255, 88, 0, 0.12);
+            border: 1px solid rgba(255, 88, 0, 0.3);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .cert-title {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
+        }
+
+        .cert-org {
+            font-size: 0.92rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--yellow);
+            font-weight: 500;
+            margin-bottom: 14px;
+        }
+
+        .cert-desc {
+            font-size: 0.95rem;
+            color: var(--dim);
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        .cert-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .cert-tag {
+            font-size: 0.76rem;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 5px 11px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text);
+            transition: all 0.25s ease;
+        }
+
+        .cert-card:hover .cert-tag {
+            border-color: rgba(255, 213, 0, 0.25);
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+        }
+
+        /* Connecting Timeline Node */
+        .cert-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 12px 0;
+            width: 100%;
+        }
+
+        .cert-line {
+            width: 2px;
+            height: 28px;
+            background: linear-gradient(180deg, var(--orange) 0%, rgba(255, 213, 0, 0.5) 100%);
+            opacity: 0.6;
+        }
+
+        .cert-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--yellow);
+            box-shadow: 0 0 12px var(--yellow);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+            width: 100%;
+        }
+
+        @media (max-width: 860px) {
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+            .cert-card {
+                padding: 26px 22px;
+            }
         }
 
         /* ── FOOTER ── */
@@ -1385,12 +1598,17 @@
 
             .cube-wrapper {
                 order: 2 !important;
-                transform: scale(0.85) !important;
+                transform: scale(0.72) !important;
                 margin: 0 auto !important;
                 width: 100% !important;
             }
 
             .hero-btns {
+                justify-content: center !important;
+                width: 100% !important;
+            }
+
+            .hero-socials {
                 justify-content: center !important;
                 width: 100% !important;
             }
@@ -1410,39 +1628,41 @@
 
 
             #about {
+                padding: 80px 24px;
+            }
+
+            .about-container {
                 display: flex;
                 flex-direction: column;
-                gap: 30px;
-                text-align: center;
+                gap: 36px;
                 align-items: center;
             }
 
-            .sec-head {
+            .about-right-col {
                 order: 1;
-                margin-bottom: 25px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+                width: 100%;
             }
 
             .about-photo {
-                order: 2;
-                width: 140px;
-                height: 140px;
+                width: 150px;
+                height: 150px;
                 margin: 0 auto;
             }
 
             .about-stats-wrapper {
-                order: 3;
                 width: 100%;
-                max-width: 320px;
+                max-width: 340px;
                 margin: 0 auto;
             }
 
             .about-bio {
-                order: 4;
+                order: 2;
                 width: 100%;
-            }
-
-            .about-container {
-                display: contents;
+                text-align: center;
             }
 
 
@@ -1522,53 +1742,12 @@
             }
         }
 
-        /* ── SPLASH SCREEN ── */
-        body.no-scroll {
-            overflow: hidden !important;
-        }
 
-        #splash-screen {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg);
-            z-index: 99999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
-            background-image:
-                linear-gradient(rgba(255, 255, 255, .022) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, .022) 1px, transparent 1px);
-            background-size: 60px 60px;
-        }
     </style>
 </head>
 
-<body class="no-scroll">
+<body>
 
-    <!-- SPLASH SCREEN -->
-    <div id="splash-screen">
-        <div class="cube-wrapper" id="cubeWrapper">
-            <div class="cube-aura"></div>
-            <div class="cube-viewport">
-                <div id="cubeScene"></div>
-            </div>
-            <div class="cube-ui">
-                <div class="cube-status" id="cubeStatus">Initializing...</div>
-                <div class="cube-btns" style="margin-top: 20px;" id="cubeBtnsWrapper">
-                    <button class="cbtn btn-m" id="btnScramble" style="display: none;">Scramble</button>
-                    <button class="cbtn cbtn-solve btn-m" id="btnSolve" style="padding: 14px 40px; font-size: 1.1rem; box-shadow: 0 0 20px rgba(255, 213, 0, 0.3);">Enter</button>
-                </div>
-                <div class="cube-hint" style="margin-top: 15px;" id="cubeHint">Drag to rotate the cube</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="cur"></div>
-    <div id="cur-dot"></div>
     <div id="progress"></div>
     <canvas id="bg-canvas"></canvas>
 
@@ -1588,7 +1767,7 @@
             <li><a href="#skills">Skills</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#certificates">Certificates</a></li>
         </ul>
     </nav>
 
@@ -1608,13 +1787,40 @@
                 Passionate and dedicated BCA Graduate with strong interest in Full Stack Development and modern web technologies. Skilled in frontend and backend development, database management and creating responsive web applications.
             </p>
             <div class="hero-btns">
-                <a href="#projects" class="btn-p btn-m">View Projects &rarr;</a>
-                <a href="#contact" class="btn-s btn-m">Get In Touch</a>
+                <a href="#projects" class="btn-p btn-m" aria-label="View Dushyanth Kumar projects">View Projects &rarr;</a>
+                <a href="Dushyanth-Kumar-Resume.pdf" download="Dushyanth-Kumar-Resume.pdf" class="btn-s btn-m" aria-label="Download Dushyanth Kumar resume">Download Resume &darr;</a>
+            </div>
+            <div class="hero-socials">
+                <a href="https://www.linkedin.com/in/dushyanth-kumar-a2564236b/" target="_blank" rel="noopener noreferrer" class="hero-social-link" aria-label="Visit Dushyanth Kumar on LinkedIn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/Dushyanth3034" target="_blank" rel="noopener noreferrer" class="hero-social-link" aria-label="Visit Dushyanth Kumar on GitHub">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>GitHub</span>
+                </a>
+                <a href="mailto:dushyanthkumar3034@gmail.com" class="hero-social-link" aria-label="Email Dushyanth Kumar">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>Email</span>
+                </a>
             </div>
         </div>
 
-        <!-- Cube will be relocated here after splash screen -->
-        <div id="heroCubeContainer"></div>
+        <!-- 3D Rubik's Cube -->
+        <div class="cube-wrapper" id="cubeWrapper">
+            <div class="cube-aura"></div>
+            <div class="cube-viewport">
+                <div id="cubeScene"></div>
+            </div>
+            <div class="cube-ui">
+                <div class="cube-status" id="cubeStatus">CUBE SCRAMBLED</div>
+                <div class="cube-btns">
+                    <button class="cbtn btn-m" id="btnScramble">Scramble</button>
+                    <button class="cbtn cbtn-solve btn-m" id="btnSolve">Solve</button>
+                </div>
+                <div class="cube-hint">Drag to rotate &bull; buttons to scramble/solve</div>
+            </div>
+        </div>
     </section>
 
     <!-- DIVIDER -->
@@ -1630,59 +1836,36 @@
     <!-- ════════ ABOUT ════════ -->
     <section id="about">
         <div class="sec-head up">
-            <h2 class="sec-title">Career <span>Objective</span></h2>
+            <h2 class="sec-title">About <span>Me</span></h2>
         </div>
 
         <div class="about-container">
-            <div class="about-photo mobile-only up">
-                <img src="profile.jpg" alt="Dushyanth Kumar" loading="lazy">
-            </div>
-
-            <div class="about-stats-wrapper mobile-only up">
-                <div class="stats">
-                    <div class="stat">
-                        <div class="stat-n" data-target="14">0</div>
-                        <div class="stat-l">Core Techs</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-n" data-target="3">0</div>
-                        <div class="stat-l">Projects</div>
-                    </div>
-                    <div class="stat" style="grid-column: span 2;">
-                        <div class="stat-text" style="font-size: 1.6rem; font-weight: 700; background: linear-gradient(135deg, var(--orange), var(--yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2;">Fresher</div>
-                        <div class="stat-l">Experience</div>
-                    </div>
-                </div>
-            </div>
-
             <div class="about-bio up">
                 <div class="about-text">
-                    <p>Seeking an opportunity to apply my technical knowledge, problem-solving skills, and creativity to develop efficient and user-friendly applications while growing as a Full Stack Developer.
-                    </p>
-                    <p>Completed an intensive Data Analytics internship, gaining practical experience in data analysis, SQL querying, power BI dashboard development and statistical analysis techniques. Also completed a Full Stack Development course, working on responsive web applications using HTML, CSS, JavaScript, React.js, Node.js and MySQL.
-                    </p>
+                    <p>I'm Dushyanth Kumar, a BCA graduate and aspiring Full Stack / Software Developer focused on building modern, responsive and user-friendly web applications. I work primarily with React.js, JavaScript, Node.js, Express.js, REST APIs, MySQL and PostgreSQL, with hands-on experience in authentication, real-time features and third-party integrations.</p>
+                    <p>I've built and deployed full-stack projects including PawMart, WeChat, California Burrito Analytical Dashboard and Fullinfaws College. These projects have given me practical experience across frontend development, backend APIs, databases, deployment and production-ready application development.</p>
                     <p class="about-accent">"Passionate about building scalable applications and bringing ideas to life."</p>
                 </div>
             </div>
 
-            <!-- Right Side: Photo + Stats (Desktop) -->
-            <div class="about-right-col desktop-only-flex up">
+            <!-- Right Side: Photo + Stats -->
+            <div class="about-right-col up">
                 <div class="about-photo">
-                    <img src="profile.jpg.jpeg" alt="Dushyanth Kumar" loading="lazy">
+                    <img src="dushyanth-profile.png" alt="Dushyanth Kumar" loading="lazy">
                 </div>
                 <div class="about-stats-wrapper">
                     <div class="stats">
                         <div class="stat">
-                            <div class="stat-n" data-target="14">0</div>
+                            <div class="stat-n" data-target="47">0</div>
                             <div class="stat-l">Core Techs</div>
                         </div>
                         <div class="stat">
-                            <div class="stat-n" data-target="3">0</div>
+                            <div class="stat-n" data-target="6">0</div>
                             <div class="stat-l">Projects</div>
                         </div>
                         <div class="stat" style="grid-column: span 2;">
-                            <div class="stat-text" style="font-size: 1.6rem; font-weight: 700; background: linear-gradient(135deg, var(--orange), var(--yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2;">Fresher</div>
-                            <div class="stat-l">Experience</div>
+                            <div class="stat-text" style="font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, var(--orange), var(--yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.2;">Entry-Level</div>
+                            <div class="stat-l">Developer</div>
                         </div>
                     </div>
                 </div>
@@ -1705,28 +1888,36 @@
             <h2 class="sec-title">My <span>Tech Stack</span></h2>
         </div>
         <div class="skills-grid">
-            <div class="skill-card sk-html up">
+            <!-- 1. Frontend -->
+            <div class="skill-card sk-frontend up">
                 <div class="sk-scene">
-                    <div class="sk-cube" style="animation-delay:-5.25s">
-                        <div class="sf f" style="background:var(--red)">&#127760;</div>
-                        <div class="sf b" style="background:var(--red)"></div>
-                        <div class="sf l" style="background:var(--red)"></div>
-                        <div class="sf r" style="background:var(--red)"></div>
-                        <div class="sf t" style="background:var(--red)"></div>
-                        <div class="sf d" style="background:var(--red)"></div>
+                    <div class="sk-cube" style="animation-delay:0s">
+                        <div class="sf f" style="background:var(--orange)">🎨</div>
+                        <div class="sf b" style="background:#cc4400"></div>
+                        <div class="sf l" style="background:#e64d00"></div>
+                        <div class="sf r" style="background:#cc4400"></div>
+                        <div class="sf t" style="background:#ff661a"></div>
+                        <div class="sf d" style="background:#b33c00"></div>
                     </div>
                 </div>
                 <div class="sk-name">Frontend</div>
-                <div class="sk-desc">HTML, CSS, React.js, JavaScript Bootstrap, Tailwind CSS</div>
-                <div class="bar-wrap">
-                    <div class="bar" data-w="100"></div>
+                <div class="sk-tags">
+                    <span class="sk-tag">HTML5</span>
+                    <span class="sk-tag">CSS3</span>
+                    <span class="sk-tag">JavaScript</span>
+                    <span class="sk-tag">React.js</span>
+                    <span class="sk-tag">Vite</span>
+                    <span class="sk-tag">Tailwind CSS</span>
+                    <span class="sk-tag">Bootstrap</span>
+                    <span class="sk-tag">Framer Motion</span>
                 </div>
-
             </div>
-            <div class="skill-card sk-css up">
+
+            <!-- 2. Backend -->
+            <div class="skill-card sk-backend up">
                 <div class="sk-scene">
-                    <div class="sk-cube" style="animation-delay:-3.5s">
-                        <div class="sf f" style="background:#0051A2">&#129302;</div>
+                    <div class="sk-cube" style="animation-delay:-1.2s">
+                        <div class="sf f" style="background:var(--blue)">⚙️</div>
                         <div class="sf b" style="background:#003d7a"></div>
                         <div class="sf l" style="background:#004489"></div>
                         <div class="sf r" style="background:#003d7a"></div>
@@ -1735,32 +1926,22 @@
                     </div>
                 </div>
                 <div class="sk-name">Backend</div>
-                <div class="sk-desc">Node.js, PHP, Python</div>
-                <div class="bar-wrap">
-                    <div class="bar" data-w="100"></div>
+                <div class="sk-tags">
+                    <span class="sk-tag">Node.js</span>
+                    <span class="sk-tag">Express.js</span>
+                    <span class="sk-tag">REST APIs</span>
+                    <span class="sk-tag">Socket.io</span>
+                    <span class="sk-tag">JWT Authentication</span>
+                    <span class="sk-tag">Google OAuth</span>
+                    <span class="sk-tag">PHP</span>
                 </div>
             </div>
-            <div class="skill-card sk-js up">
+
+            <!-- 3. Databases -->
+            <div class="skill-card sk-databases up">
                 <div class="sk-scene">
-                    <div class="sk-cube" style="animation-delay:-1.75s">
-                        <div class="sf f" style="background:#FFD500">&#9729;</div>
-                        <div class="sf b" style="background:#ccaa00"></div>
-                        <div class="sf l" style="background:#dbb800"></div>
-                        <div class="sf r" style="background:#ccaa00"></div>
-                        <div class="sf t" style="background:#ffdf33"></div>
-                        <div class="sf d" style="background:#997e00"></div>
-                    </div>
-                </div>
-                <div class="sk-name">Databases</div>
-                <div class="sk-desc">MySQL</div>
-                <div class="bar-wrap">
-                    <div class="bar" data-w="100"></div>
-                </div>
-            </div>
-            <div class="skill-card sk-py up">
-                <div class="sk-scene">
-                    <div class="sk-cube" style="animation-delay:0s">
-                        <div class="sf f" style="background:#009B48">&#128013;</div>
+                    <div class="sk-cube" style="animation-delay:-2.4s">
+                        <div class="sf f" style="background:var(--green)">🗄️</div>
                         <div class="sf b" style="background:#007336"></div>
                         <div class="sf l" style="background:#00853e"></div>
                         <div class="sf r" style="background:#007336"></div>
@@ -1768,10 +1949,130 @@
                         <div class="sf d" style="background:#005c2b"></div>
                     </div>
                 </div>
-                <div class="sk-name">Tools</div>
-                <div class="sk-desc">VS Code, Jupyter, Antigravity, GitHub, MySQL Workbench</div>
-                <div class="bar-wrap">
-                    <div class="bar" data-w="100"></div>
+                <div class="sk-name">Databases</div>
+                <div class="sk-tags">
+                    <span class="sk-tag">PostgreSQL</span>
+                    <span class="sk-tag">MySQL</span>
+                    <span class="sk-tag">MongoDB</span>
+                    <span class="sk-tag">TiDB</span>
+                    <span class="sk-tag">Prisma ORM</span>
+                    <span class="sk-tag">Sequelize</span>
+                </div>
+            </div>
+
+            <!-- 4. Programming -->
+            <div class="skill-card sk-programming up">
+                <div class="sk-scene">
+                    <div class="sk-cube" style="animation-delay:-3.6s">
+                        <div class="sf f" style="background:var(--yellow)">⚡</div>
+                        <div class="sf b" style="background:#ccaa00"></div>
+                        <div class="sf l" style="background:#dbb800"></div>
+                        <div class="sf r" style="background:#ccaa00"></div>
+                        <div class="sf t" style="background:#ffdf33"></div>
+                        <div class="sf d" style="background:#997e00"></div>
+                    </div>
+                </div>
+                <div class="sk-name">Programming</div>
+                <div class="sk-tags">
+                    <span class="sk-tag" style="border-color:var(--yellow);color:var(--yellow)">JavaScript</span>
+                    <span class="sk-tag">Python</span>
+                    <span class="sk-tag">Java</span>
+                    <span class="sk-tag">C</span>
+                    <span class="sk-tag">SQL</span>
+                </div>
+            </div>
+
+            <!-- 5. Full Stack & APIs -->
+            <div class="skill-card sk-fullstack up">
+                <div class="sk-scene">
+                    <div class="sk-cube" style="animation-delay:-4.8s">
+                        <div class="sf f" style="background:var(--red)">🔗</div>
+                        <div class="sf b" style="background:#cc1100"></div>
+                        <div class="sf l" style="background:#e61300"></div>
+                        <div class="sf r" style="background:#cc1100"></div>
+                        <div class="sf t" style="background:#ff3322"></div>
+                        <div class="sf d" style="background:#990d00"></div>
+                    </div>
+                </div>
+                <div class="sk-name">Full Stack & APIs</div>
+                <div class="sk-tags">
+                    <span class="sk-tag">REST APIs</span>
+                    <span class="sk-tag">Authentication</span>
+                    <span class="sk-tag">Authorization</span>
+                    <span class="sk-tag">JWT</span>
+                    <span class="sk-tag">Socket.io</span>
+                    <span class="sk-tag">Google OAuth</span>
+                    <span class="sk-tag">Cloudinary</span>
+                    <span class="sk-tag">Razorpay</span>
+                    <span class="sk-tag">Brevo</span>
+                </div>
+            </div>
+
+            <!-- 6. Dev Tools -->
+            <div class="skill-card sk-devtools up">
+                <div class="sk-scene">
+                    <div class="sk-cube" style="animation-delay:-6.0s">
+                        <div class="sf f" style="background:#a855f7">🛠️</div>
+                        <div class="sf b" style="background:#7e22ce"></div>
+                        <div class="sf l" style="background:#9333ea"></div>
+                        <div class="sf r" style="background:#7e22ce"></div>
+                        <div class="sf t" style="background:#c084fc"></div>
+                        <div class="sf d" style="background:#581c87"></div>
+                    </div>
+                </div>
+                <div class="sk-name">Dev Tools</div>
+                <div class="sk-tags">
+                    <span class="sk-tag">Git</span>
+                    <span class="sk-tag">GitHub</span>
+                    <span class="sk-tag">VS Code</span>
+                    <span class="sk-tag">Postman</span>
+                    <span class="sk-tag">MySQL Workbench</span>
+                    <span class="sk-tag">XAMPP</span>
+                    <span class="sk-tag">Jupyter Notebook</span>
+                </div>
+            </div>
+
+            <!-- 7. Deployment -->
+            <div class="skill-card sk-deployment up">
+                <div class="sk-scene">
+                    <div class="sk-cube" style="animation-delay:-7.2s">
+                        <div class="sf f" style="background:#06b6d4">☁️</div>
+                        <div class="sf b" style="background:#0e7490"></div>
+                        <div class="sf l" style="background:#0891b2"></div>
+                        <div class="sf r" style="background:#0e7490"></div>
+                        <div class="sf t" style="background:#22d3ee"></div>
+                        <div class="sf d" style="background:#155e75"></div>
+                    </div>
+                </div>
+                <div class="sk-name">Deployment</div>
+                <div class="sk-tags">
+                    <span class="sk-tag">Vercel</span>
+                    <span class="sk-tag">Render</span>
+                    <span class="sk-tag">Netlify</span>
+                    <span class="sk-tag">Railway</span>
+                    <span class="sk-tag">TiDB Cloud</span>
+                </div>
+            </div>
+
+            <!-- 8. Additional Skills -->
+            <div class="skill-card sk-additional up">
+                <div class="sk-scene">
+                    <div class="sk-cube" style="animation-delay:-8.4s">
+                        <div class="sf f" style="background:#64748b">📊</div>
+                        <div class="sf b" style="background:#334155"></div>
+                        <div class="sf l" style="background:#475569"></div>
+                        <div class="sf r" style="background:#334155"></div>
+                        <div class="sf t" style="background:#94a3b8"></div>
+                        <div class="sf d" style="background:#1e293b"></div>
+                    </div>
+                </div>
+                <div class="sk-name">Additional Skills</div>
+                <div class="sk-tags">
+                    <span class="sk-tag">Power BI</span>
+                    <span class="sk-tag">Excel</span>
+                    <span class="sk-tag">Pandas</span>
+                    <span class="sk-tag">NumPy</span>
+                    <span class="sk-tag">Scikit-learn</span>
                 </div>
             </div>
         </div>
@@ -1830,57 +2131,138 @@
             <div class="proj p1 up">
                 <div class="proj-inner">
                     <div class="proj-f">
-                        <div class="proj-num">01 / 03</div>
+                        <div class="proj-num">01 / 06</div>
                         <div class="proj-ico"
-                            style="background-image: url('cine_versa.png'); background-size: cover; background-position: center; border-radius: 12px; height: 120px; width: 100%; margin-bottom: 12px;">
+                            role="img"
+                            aria-label="PawMart pet marketplace project preview"
+                            style="background-image: url('pawmart-thumbnail.png'); background-size: cover; background-position: center; border-radius: 12px; height: 120px; width: 100%; margin-bottom: 12px;">
                         </div>
-                        <div class="proj-title">Cine Versa</div>
-                        <div class="proj-tags"><span class="ptag"
-                                style="color:var(--yellow);border-color:var(--yellow)">React.js</span><span class="ptag"
-                                style="color:var(--orange);border-color:var(--orange)">Movies</span></div>
+                        <div class="proj-title">PawMart – Pet Marketplace & Services</div>
+                        <div class="proj-tags">
+                            <span class="ptag" style="color:var(--red);border-color:var(--red)">React</span>
+                            <span class="ptag" style="color:var(--orange);border-color:var(--orange)">Node.js</span>
+                            <span class="ptag" style="color:var(--blue);border-color:var(--blue)">PostgreSQL</span>
+                            <span class="ptag" style="color:var(--yellow);border-color:var(--yellow)">Socket.io</span>
+                        </div>
                     </div>
                     <div class="proj-bk">
-                        <div class="proj-desc">A comprehensive movie platform for exploring and discovering films.</div>
-                        <a href="https://dushyanth3034.github.io/Cine-Versa/" class="proj-link" target="_blank">View Live &rarr;</a>
+                        <div class="proj-desc">A full-stack pet marketplace and services platform connecting buyers, sellers and pet-service providers. Includes role-based dashboards, product purchasing, service booking, payments, seller/provider management, admin functionality and real-time features.</div>
+                        <a href="https://pawmart-beta.vercel.app" class="proj-link" target="_blank" rel="noopener noreferrer">View Live &rarr;</a>
                     </div>
                 </div>
             </div>
+
             <div class="proj p2 up">
                 <div class="proj-inner">
                     <div class="proj-f">
-                        <div class="proj-num">02 / 03</div>
+                        <div class="proj-num">02 / 06</div>
                         <div class="proj-ico"
-                            style="background-image: url('analytics.png'); background-size: cover; background-position: center; border-radius: 12px; height: 120px; width: 100%; margin-bottom: 12px;">
+                            role="img"
+                            aria-label="WeChat messaging application project preview"
+                            style="background-image: url('wechat-messaging-thumbnail.png'); background-size: cover; background-position: center; border-radius: 12px; height: 120px; width: 100%; margin-bottom: 12px;">
                         </div>
-                        <div class="proj-title">Analytical Dashboard</div>
-                        <div class="proj-tags"><span class="ptag"
-                                style="color:var(--blue);border-color:var(--blue)">Python</span><span class="ptag"
-                                style="color:var(--green);border-color:var(--green)">Data Analytics</span></div>
+                        <div class="proj-title">WeChat – Social Messaging Web App</div>
+                        <div class="proj-tags">
+                            <span class="ptag" style="color:var(--blue);border-color:var(--blue)">React</span>
+                            <span class="ptag" style="color:var(--yellow);border-color:var(--yellow)">Node.js</span>
+                            <span class="ptag" style="color:var(--orange);border-color:var(--orange)">Socket.io</span>
+                            <span class="ptag" style="color:var(--green);border-color:var(--green)">MySQL</span>
+                        </div>
                     </div>
                     <div class="proj-bk">
-                        <div class="proj-desc">Interactive sales analytics & prediction dashboard built with Streamlit and Plotly.
-                        </div>
-                        <a href="https://analytics-dashboard-dgotuappox6qr5mgfjiltnr.streamlit.app/" class="proj-link" target="_blank">View Live &rarr;</a>
+                        <div class="proj-desc">A modern social messaging web application featuring real-time-style chat experiences, contacts, stories/moments, profiles, authentication and a guest demo mode. Built with a responsive interface for desktop and mobile devices.</div>
+                        <a href="https://we-chat-taupe.vercel.app" class="proj-link" target="_blank" rel="noopener noreferrer">View Live &rarr;</a>
                     </div>
                 </div>
             </div>
+
             <div class="proj p3 up">
                 <div class="proj-inner">
                     <div class="proj-f">
-                        <div class="proj-num">03 / 03</div>
+                        <div class="proj-num">03 / 06</div>
                         <div class="proj-ico"
+                            role="img"
+                            aria-label="California Burrito analytics dashboard preview"
+                            style="background-image: url('california-burrito-thumbnail.png'); background-size: cover; background-position: center; border-radius: 12px; height: 120px; width: 100%; margin-bottom: 12px;">
+                        </div>
+                        <div class="proj-title">California Burrito – Analytical Dashboard</div>
+                        <div class="proj-tags">
+                            <span class="ptag" style="color:var(--yellow);border-color:var(--yellow)">React</span>
+                            <span class="ptag" style="color:var(--orange);border-color:var(--orange)">Node.js</span>
+                            <span class="ptag" style="color:var(--green);border-color:var(--green)">MySQL</span>
+                            <span class="ptag" style="color:var(--blue);border-color:var(--blue)">Recharts</span>
+                        </div>
+                    </div>
+                    <div class="proj-bk">
+                        <div class="proj-desc">A full-stack analytics dashboard designed to analyze large-scale restaurant sales data. Provides interactive business insights, sales metrics, filtering and data visualizations through a responsive dashboard interface.</div>
+                        <a href="https://california-buritto-analytical-dashb.vercel.app" class="proj-link" target="_blank" rel="noopener noreferrer">View Live &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="proj p4 up">
+                <div class="proj-inner">
+                    <div class="proj-f">
+                        <div class="proj-num">04 / 06</div>
+                        <div class="proj-ico"
+                            role="img"
+                            aria-label="Fullinfaws College landing page preview"
+                            style="background-image: url('fullinfaws-thumbnail.png'); background-size: cover; background-position: center; border-radius: 12px; height: 120px; width: 100%; margin-bottom: 12px;">
+                        </div>
+                        <div class="proj-title">Fullinfaws College – Premium Landing Page</div>
+                        <div class="proj-tags">
+                            <span class="ptag" style="color:var(--green);border-color:var(--green)">React</span>
+                            <span class="ptag" style="color:var(--yellow);border-color:var(--yellow)">Tailwind CSS</span>
+                            <span class="ptag" style="color:var(--orange);border-color:var(--orange)">Framer Motion</span>
+                        </div>
+                    </div>
+                    <div class="proj-bk">
+                        <div class="proj-desc">A premium responsive college landing page featuring modern UI/UX, smooth animations, responsive navigation, engaging content sections and a polished mobile experience.</div>
+                        <a href="https://fullinfaws-college-premium-landing.vercel.app" class="proj-link" target="_blank" rel="noopener noreferrer">View Live &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="proj p5 up">
+                <div class="proj-inner">
+                    <div class="proj-f">
+                        <div class="proj-num">05 / 06</div>
+                        <div class="proj-ico"
+                            role="img"
+                            aria-label="Cine Versa movie platform preview"
+                            style="background-image: url('cine_versa.png'); background-size: cover; background-position: center; border-radius: 12px; height: 120px; width: 100%; margin-bottom: 12px;">
+                        </div>
+                        <div class="proj-title">Cine Versa</div>
+                        <div class="proj-tags">
+                            <span class="ptag" style="color:var(--yellow);border-color:var(--yellow)">React.js</span>
+                            <span class="ptag" style="color:var(--orange);border-color:var(--orange)">Movies</span>
+                        </div>
+                    </div>
+                    <div class="proj-bk">
+                        <div class="proj-desc">A comprehensive movie platform for exploring and discovering films.</div>
+                        <a href="https://dushyanth3034.github.io/Cine-Versa/" class="proj-link" target="_blank" rel="noopener noreferrer">View Live &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="proj p6 up">
+                <div class="proj-inner">
+                    <div class="proj-f">
+                        <div class="proj-num">06 / 06</div>
+                        <div class="proj-ico"
+                            role="img"
+                            aria-label="Student course enrollment system preview"
                             style="background-image: url('sql_enrollment.png'); background-size: cover; background-position: center; border-radius: 12px; height: 120px; width: 100%; margin-bottom: 12px;">
                         </div>
                         <div class="proj-title">Student Course Enrollment System</div>
-                        <div class="proj-tags"><span class="ptag"
-                                style="color:var(--red);border-color:var(--red)">SQL</span><span class="ptag"
-                                style="color:var(--yellow);border-color:var(--yellow)">Database</span></div>
+                        <div class="proj-tags">
+                            <span class="ptag" style="color:var(--red);border-color:var(--red)">SQL</span>
+                            <span class="ptag" style="color:var(--yellow);border-color:var(--yellow)">Database</span>
+                        </div>
                     </div>
                     <div class="proj-bk">
-                        <div class="proj-desc">A comprehensive SQL-based system for managing student course enrollments.
-                        </div>
-                        <a href="https://github.com/Dushyanth3034/Student-Course-Enrollment-System/tree/main" class="proj-link"
-                            target="_blank">View Code &rarr;</a>
+                        <div class="proj-desc">A comprehensive SQL-based system for managing student course enrollments.</div>
+                        <a href="https://github.com/Dushyanth3034/Student-Course-Enrollment-System/tree/main" class="proj-link" target="_blank" rel="noopener noreferrer">View Code &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -1894,30 +2276,97 @@
         <div class="pip"></div>
     </div>
 
-    <!-- ════════ CONTACT ════════ -->
-    <section id="contact">
-        <div class="sec-head">
-            <div class="sec-tag">05 &mdash; Contact</div>
-            <h2 class="sec-title">Let's <span>Connect</span></h2>
-            <p class="sec-sub">Have a project? Let's solve it together.</p>
+    <!-- ════════ CERTIFICATIONS & TRAINING ════════ -->
+    <section id="certificates">
+        <div class="sec-head up">
+            <div class="sec-tag">05 &mdash; Certifications</div>
+            <h2 class="sec-title">Certifications & <span>Training</span></h2>
+            <p class="sec-sub">Building practical skills through professional training and hands-on development.</p>
         </div>
-        <form id="contact-form" class="contact-box up">
-            <div class="f-row">
-                <div class="f-grp"><label>Your Name</label><input type="text" id="name" name="name"
-                        placeholder="John Doe" required>
+
+        <div class="cert-container">
+            <!-- Featured Top Card: Full Stack Development -->
+            <div class="cert-card cert-featured up">
+                <div class="cert-top-bar">
+                    <div class="cert-icon-wrap" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                    </div>
+                    <div class="cert-badge">PRIMARY FOCUS</div>
                 </div>
-                <div class="f-grp"><label>Email Address</label><input type="email" id="email" name="email"
-                        placeholder="john@example.com" required>
+                <h3 class="cert-title">Full Stack Development</h3>
+                <div class="cert-org">Professional Training / Course</div>
+                <p class="cert-desc">Hands-on training in modern full-stack web development covering frontend, backend, databases and API development. Built responsive web applications using HTML, CSS, JavaScript and React, while developing backend functionality with Node.js, Express.js and databases such as MySQL. Applied these concepts to practical full-stack projects.</p>
+                <div class="cert-tags">
+                    <span class="cert-tag" style="border-color:var(--orange);color:var(--orange)">HTML5</span>
+                    <span class="cert-tag" style="border-color:var(--orange);color:var(--orange)">CSS3</span>
+                    <span class="cert-tag" style="border-color:var(--yellow);color:var(--yellow)">JavaScript</span>
+                    <span class="cert-tag" style="border-color:var(--yellow);color:var(--yellow)">React.js</span>
+                    <span class="cert-tag" style="border-color:var(--blue);color:var(--blue)">Node.js</span>
+                    <span class="cert-tag" style="border-color:var(--blue);color:var(--blue)">Express.js</span>
+                    <span class="cert-tag" style="border-color:var(--green);color:var(--green)">MySQL</span>
+                    <span class="cert-tag" style="border-color:var(--red);color:var(--red)">REST APIs</span>
+                    <span class="cert-tag">Git/GitHub</span>
                 </div>
             </div>
-            <div class="f-grp"><label>Subject</label><input type="text" id="subject" name="subject"
-                    placeholder="What's this about?" required>
+
+            <!-- Subtle Connecting Timeline -->
+            <div class="cert-connector" aria-hidden="true">
+                <div class="cert-line"></div>
+                <div class="cert-dot"></div>
             </div>
-            <div class="f-grp"><label>Message</label><textarea id="message" name="message"
-                    placeholder="Tell me about your project..." required></textarea>
+
+            <!-- Secondary Cards 2-Column Grid -->
+            <div class="cert-grid">
+                <!-- Card 2: AI & Data Science Training -->
+                <div class="cert-card up">
+                    <div class="cert-top-bar">
+                        <div class="cert-icon-wrap ai" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 8v8"></path>
+                                <path d="M8 12h8"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="cert-title">AI & Data Science Training</h3>
+                    <div class="cert-org">NASSCOM Foundation</div>
+                    <p class="cert-desc">Completed technical training covering the fundamentals of Python, data processing and machine learning. Gained practical exposure to working with datasets, Python libraries and foundational AI/Data Science concepts.</p>
+                    <div class="cert-tags">
+                        <span class="cert-tag" style="border-color:var(--yellow);color:var(--yellow)">Python</span>
+                        <span class="cert-tag">NumPy</span>
+                        <span class="cert-tag">Pandas</span>
+                        <span class="cert-tag">Scikit-learn</span>
+                        <span class="cert-tag">PyTorch</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Data Analytics Internship -->
+                <div class="cert-card up">
+                    <div class="cert-top-bar">
+                        <div class="cert-icon-wrap analytics" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="20" x2="18" y2="10"></line>
+                                <line x1="12" y1="20" x2="12" y2="4"></line>
+                                <line x1="6" y1="20" x2="6" y2="14"></line>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="cert-title">Data Analytics Internship</h3>
+                    <div class="cert-org">VTricks Technologies</div>
+                    <p class="cert-desc">Gained practical experience working with business data, SQL queries, data visualization and dashboard development. Worked with tools including Power BI, Excel and databases to transform raw data into meaningful business insights.</p>
+                    <div class="cert-tags">
+                        <span class="cert-tag" style="border-color:var(--yellow);color:var(--yellow)">Power BI</span>
+                        <span class="cert-tag" style="border-color:var(--green);color:var(--green)">SQL</span>
+                        <span class="cert-tag">Advanced Excel</span>
+                        <span class="cert-tag">DAX</span>
+                        <span class="cert-tag">Data Visualization</span>
+                    </div>
+                </div>
             </div>
-            <button type="submit" id="submit-btn" class="f-btn btn-m">Send Message &#9992;</button>
-        </form>
+        </div>
     </section>
 
     <!-- FOOTER -->
@@ -1960,19 +2409,7 @@
     </footer>
 
     <script>
-        // ══════════════════════════════════════════════════
-        //  CURSOR
-        // ══════════════════════════════════════════════════
-        const cur = document.getElementById('cur');
-        const curDot = document.getElementById('cur-dot');
-        let mx = 0, my = 0, cx = 0, cy = 0;
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-        (function moveCursor() {
-            cx += (mx - cx) * .14; cy += (my - cy) * .14;
-            cur.style.left = cx + 'px'; cur.style.top = cy + 'px';
-            curDot.style.left = mx + 'px'; curDot.style.top = my + 'px';
-            requestAnimationFrame(moveCursor);
-        })();
+
 
         // ══════════════════════════════════════════════════
         //  MOBILE NAV TOGGLE
@@ -2042,10 +2479,10 @@
         // ══════════════════════════════════════════════════
         //  3D RUBIK'S CUBE — FULL 27-CUBIE SYSTEM
         // ══════════════════════════════════════════════════
-        const CUBIE_PX = 66;
+        const CUBIE_PX = 82;
         const GAP_PX = 0;
-        const HALF_PX = 33;
-        const STEP_PX = 66;
+        const HALF_PX = 41;
+        const STEP_PX = 82;
 
         const FC = {
             front: { bg: '#009B48', cls: 'fc-green' },
@@ -2248,19 +2685,9 @@
             setStatus('Solved! ✓');
         }
 
-        async function initSplashCube(n = 14) {
-            const cubeWrapper = document.getElementById("cubeWrapper");
-            if (!cubeWrapper) return;
-
-            // Instantly scramble the cube so it's ready for the user to solve
-            cubeWrapper.style.opacity = 0;
-            await scramble(n, 0);
-            cubeWrapper.style.opacity = 1;
-        }
-
         // Build and start
         buildCube();
-        initSplashCube(14);
+        scramble(10, 0);
 
         // Buttons
         const btnScramble = document.getElementById('btnScramble');
@@ -2274,74 +2701,11 @@
         }
 
         const btnSolve = document.getElementById('btnSolve');
-        let inSplashScreen = true;
-
         if (btnSolve) {
-            // Allow pressing "Enter" key to trigger the solve button in splash screen
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' && inSplashScreen && btnSolve.style.pointerEvents !== 'none') {
-                    btnSolve.click();
-                }
-            });
-
-            btnSolve.addEventListener('click', async () => {
+            btnSolve.addEventListener('click', () => {
                 manualMode = true; clearTimeout(manualTimer);
                 manualTimer = setTimeout(() => { manualMode = false; }, 15000);
-                
-                if (inSplashScreen) {
-                    // Prevent double clicking
-                    btnSolve.style.pointerEvents = 'none';
-                    btnSolve.style.opacity = '0.5';
-
-                    // Solve the cube visually
-                    await solve(340);
-                    
-                    // Wait briefly for the user to admire the solved cube
-                    await sleep(600);
-
-                    // Fade out the splash screen
-                    const splash = document.getElementById('splash-screen');
-                    if (splash) {
-                        splash.style.opacity = '0';
-                        setTimeout(() => {
-                            splash.style.display = 'none';
-                            
-                            // Relocate cube to hero section
-                            const heroContainer = document.getElementById('heroCubeContainer');
-                            const cubeWrapper = document.getElementById('cubeWrapper');
-                            if (heroContainer && cubeWrapper) {
-                                heroContainer.appendChild(cubeWrapper);
-                            }
-
-                            // Restore button styles
-                            btnSolve.textContent = 'Solve';
-                            btnSolve.style.padding = '7px 18px';
-                            btnSolve.style.fontSize = '0.82rem';
-                            btnSolve.style.boxShadow = 'none';
-                            btnSolve.style.pointerEvents = 'auto';
-                            btnSolve.style.opacity = '1';
-
-                            if (btnScramble) btnScramble.style.display = 'inline-block';
-
-                            const cubeHint = document.getElementById('cubeHint');
-                            if (cubeHint) cubeHint.innerHTML = 'Drag to rotate &bull; buttons to scramble/solve';
-                            
-                            const cubeBtnsWrapper = document.getElementById('cubeBtnsWrapper');
-                            if (cubeBtnsWrapper) {
-                                cubeBtnsWrapper.style.marginTop = '0px';
-                                cubeBtnsWrapper.style.marginBottom = '9px';
-                            }
-
-                            inSplashScreen = false;
-                        }, 800); // Wait for CSS transition to complete
-                    }
-                    
-                    // Re-enable body scrolling
-                    document.body.classList.remove('no-scroll');
-                } else {
-                    // Normal solve in hero section
-                    solve(380);
-                }
+                solve(380);
             });
         }
 
@@ -2424,7 +2788,7 @@
         //  TYPEWRITER
         // ══════════════════════════════════════════════════
         const typedEl = document.getElementById('typed');
-        const words = ['Full Stack Developer', 'BCA Student', 'Data Analyst Intern'];
+        const words = ['Full Stack Developer', 'Software Developer', 'Frontend Developer'];
         let wi = 0, ci = 0, isDeleting = false;
         (function type() {
             const w = words[wi];
@@ -2521,55 +2885,7 @@
             navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur2));
         }, { passive: true });
 
-        // ══════════════════════════════════════════════════
-        //  EMAILJS FORM SUBMISSION
-        // ══════════════════════════════════════════════════
-        const contactForm = document.getElementById('contact-form');
-        const submitBtn = document.getElementById('submit-btn');
 
-        if (contactForm && submitBtn) {
-            contactForm.addEventListener('submit', function (event) {
-                event.preventDefault();
-
-                // Initial button state
-                const originalBtnText = submitBtn.innerHTML;
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = 'Sending... <span class="spinner"></span>';
-
-                emailjs.send(
-                    'service_q79e4ev',
-                    'template_1w05vnb',
-                    {
-                        name: event.target.elements.name.value,
-                        from_name: event.target.elements.name.value,
-                        email: event.target.elements.email.value,
-                        reply_to: event.target.elements.email.value,
-                        subject: event.target.elements.subject.value,
-                        message: event.target.elements.message.value
-                    },
-                    'VpLGOSsSIQN26ucqH'
-                )
-                    .then(() => {
-                        submitBtn.innerHTML = 'Sent Successfully! ✅';
-                        submitBtn.style.background = 'var(--green)';
-                        contactForm.reset();
-                        setTimeout(() => {
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = originalBtnText;
-                            submitBtn.style.background = '';
-                        }, 5000);
-                    }, (error) => {
-                        console.error('EmailJS FAILED...', error);
-                        submitBtn.innerHTML = 'Error! ❌';
-                        submitBtn.style.background = 'var(--red)';
-                        setTimeout(() => {
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = originalBtnText;
-                            submitBtn.style.background = '';
-                        }, 5000);
-                    });
-            });
-        }
     </script>
 </body>
 
