@@ -32,6 +32,11 @@
     }
     </script>
 
+    <script>
+        if (sessionStorage.getItem('portfolio_intro_seen')) {
+            document.documentElement.classList.add('intro-skip');
+        }
+    </script>
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
@@ -710,6 +715,7 @@
             position: relative;
             z-index: 1;
             padding: 100px 60px;
+            scroll-margin-top: 100px;
         }
 
         .sec-head {
@@ -1721,7 +1727,7 @@
                 justify-content: flex-start !important;
                 height: auto !important;
                 min-height: 100vh !important;
-                width: 100vw !important;
+                width: 100% !important;
                 overflow-x: hidden !important;
             }
 
@@ -1885,11 +1891,160 @@
             }
         }
 
+        /* ── VERTICAL SPLIT INTRO OVERLAY ── */
+        html.intro-skip #introOverlay {
+            display: none !important;
+        }
+
+        .intro-overlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: auto;
+            user-select: none;
+            overflow: hidden;
+        }
+
+        .intro-overlay.hidden {
+            display: none !important;
+            pointer-events: none !important;
+        }
+
+        .intro-panel {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 51vw;
+            height: 100vh;
+            background: #070707;
+            z-index: 1;
+            will-change: transform;
+            transition: transform 0.95s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .intro-panel-left {
+            left: 0;
+            transform: translateX(0);
+        }
+
+        .intro-panel-right {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .intro-overlay.split .intro-panel-left {
+            transform: translateX(-101%);
+        }
+
+        .intro-overlay.split .intro-panel-right {
+            transform: translateX(101%);
+        }
+
+        .intro-content-wrap {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .intro-content-wrap.fade-out {
+            opacity: 0;
+            transform: scale(0.96);
+        }
+
+        .intro-name {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(2.2rem, 7vw, 4.4rem);
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+            margin-bottom: 24px;
+        }
+
+        .intro-word {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+
+        .word-dushyanth {
+            color: #ffffff;
+        }
+
+        .word-kumar {
+            background: linear-gradient(135deg, var(--red) 0%, var(--orange) 50%, var(--yellow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro-word.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .intro-line-wrap {
+            height: 120px;
+            width: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .intro-line {
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--orange) 0%, var(--red) 50%, var(--yellow) 100%);
+            box-shadow: 0 0 12px var(--orange);
+            transform: scaleY(0);
+            transform-origin: center center;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .intro-line.grow {
+            transform: scaleY(1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .intro-panel {
+                transition: none !important;
+            }
+        }
+
 
     </style>
 </head>
 
 <body>
+
+    <!-- ════════ INTRO CURTAIN OVERLAY ════════ -->
+    <div id="introOverlay" class="intro-overlay" aria-hidden="true">
+        <div class="intro-panel intro-panel-left"></div>
+        <div class="intro-panel intro-panel-right"></div>
+
+        <div class="intro-content-wrap" id="introContent">
+            <div class="intro-name">
+                <span class="intro-word word-dushyanth">DUSHYANTH</span>
+                <span class="intro-word word-kumar">KUMAR</span>
+            </div>
+            <div class="intro-line-wrap">
+                <div class="intro-line"></div>
+            </div>
+        </div>
+    </div>
 
     <div id="progress"></div>
     <canvas id="bg-canvas"></canvas>
@@ -3176,6 +3331,43 @@
             badge.addEventListener('touchstart', onDragStart, { passive: true });
             window.addEventListener('touchmove', onDragMove, { passive: true });
             window.addEventListener('touchend', onDragEnd);
+        })();
+
+        // ══════════════════════════════════════════════════
+        //  VERTICAL SPLIT INTRO OVERLAY CONTROLLER
+        // ══════════════════════════════════════════════════
+        (function runIntroSequence() {
+            const overlay = document.getElementById('introOverlay');
+            const content = document.getElementById('introContent');
+            if (!overlay || !content) return;
+
+            if (sessionStorage.getItem('portfolio_intro_seen') || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                overlay.classList.add('hidden');
+                return;
+            }
+
+            document.body.style.overflow = 'hidden';
+
+            const word1 = overlay.querySelector('.word-dushyanth');
+            const word2 = overlay.querySelector('.word-kumar');
+            const line = overlay.querySelector('.intro-line');
+
+            // 0.3s: DUSHYANTH appears
+            setTimeout(() => word1 && word1.classList.add('show'), 300);
+            // 0.7s: KUMAR appears
+            setTimeout(() => word2 && word2.classList.add('show'), 700);
+            // 1.6s: Vertical line grows (name stays fully visible for ~1 sec from 0.7s to 1.6s)
+            setTimeout(() => line && line.classList.add('grow'), 1600);
+            // 2.2s: Name content begins fading out
+            setTimeout(() => content.classList.add('fade-out'), 2200);
+            // 2.35s: Curtain split screen begins (left & right panels slide outward)
+            setTimeout(() => overlay.classList.add('split'), 2350);
+            // ~3.35s: Complete & unmount intro overlay from DOM
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+                sessionStorage.setItem('portfolio_intro_seen', 'true');
+            }, 3350);
         })();
     </script>
 </body>
