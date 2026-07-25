@@ -1250,205 +1250,159 @@
         /* ── CERTIFICATIONS & TRAINING ── */
         #certificates {
             background: var(--bg2);
-            position: relative;
         }
 
-        .cert-container {
+        .cert-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
             max-width: 1100px;
             margin: 0 auto;
+        }
+
+        .tcard {
+            background: rgba(255, 255, 255, 0.025);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cert-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 22px;
-            padding: 34px 32px;
-            transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
             position: relative;
             overflow: hidden;
-            width: 100%;
+            transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .cert-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.04) 0%, transparent 70%);
-            transition: opacity 0.4s ease;
-        }
-
-        .cert-card:hover::before {
-            opacity: 1;
-        }
-
-        .cert-card:hover {
+        .tcard:hover {
             transform: translateY(-6px);
-            border-color: rgba(255, 213, 0, 0.25);
-            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .cert-featured {
-            border: 1px solid rgba(255, 88, 0, 0.3);
-            background: linear-gradient(135deg, rgba(255, 88, 0, 0.06) 0%, rgba(255, 213, 0, 0.02) 50%, rgba(255, 255, 255, 0.01) 100%);
-            box-shadow: 0 12px 35px rgba(255, 88, 0, 0.08);
+        .tcard.tc-primary {
+            border-top: 3px solid var(--orange);
+            background: linear-gradient(180deg, rgba(255, 88, 0, 0.04) 0%, rgba(255, 255, 255, 0.025) 100%);
         }
 
-        .cert-featured:hover {
+        .tcard.tc-primary:hover {
             border-color: var(--orange);
-            box-shadow: 0 20px 50px rgba(255, 88, 0, 0.22);
+            box-shadow: 0 18px 45px rgba(255, 88, 0, 0.18);
         }
 
-        .cert-top-bar {
+        .tcard.tc-ai {
+            border-top: 3px solid var(--blue);
+        }
+
+        .tcard.tc-ai:hover {
+            border-color: #38bdf8;
+            box-shadow: 0 18px 45px rgba(0, 81, 162, 0.2);
+        }
+
+        .tcard.tc-analytics {
+            border-top: 3px solid var(--green);
+        }
+
+        .tcard.tc-analytics:hover {
+            border-color: #4ade80;
+            box-shadow: 0 18px 45px rgba(0, 155, 72, 0.2);
+        }
+
+        .tcard-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
-        .cert-icon-wrap {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: rgba(255, 88, 0, 0.12);
-            border: 1px solid rgba(255, 88, 0, 0.25);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--orange);
-            transition: transform 0.3s ease, background-color 0.3s ease;
+        .tcard-num {
+            font: 700 0.76rem 'JetBrains Mono', monospace;
+            color: var(--dim);
         }
 
-        .cert-card:hover .cert-icon-wrap {
-            transform: scale(1.08);
-            background: rgba(255, 88, 0, 0.2);
-        }
-
-        .cert-icon-wrap.ai {
-            background: rgba(0, 81, 162, 0.15);
-            border-color: rgba(0, 81, 162, 0.3);
-            color: #38bdf8;
-        }
-
-        .cert-card:hover .cert-icon-wrap.ai {
-            background: rgba(0, 81, 162, 0.25);
-        }
-
-        .cert-icon-wrap.analytics {
-            background: rgba(0, 155, 72, 0.15);
-            border-color: rgba(0, 155, 72, 0.3);
-            color: #4ade80;
-        }
-
-        .cert-card:hover .cert-icon-wrap.analytics {
-            background: rgba(0, 155, 72, 0.25);
-        }
-
-        .cert-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.72rem;
-            font-family: 'JetBrains Mono', monospace;
+        .tcard-badge {
+            font: 700 0.68rem 'JetBrains Mono', monospace;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--orange);
             background: rgba(255, 88, 0, 0.12);
             border: 1px solid rgba(255, 88, 0, 0.3);
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 6px;
-            font-weight: 700;
         }
 
-        .cert-title {
-            font-size: 1.45rem;
+        .tcard-ico {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .tcard:hover .tcard-ico {
+            transform: scale(1.08);
+        }
+
+        .tcard-ico.primary {
+            background: rgba(255, 88, 0, 0.12);
+            border: 1px solid rgba(255, 88, 0, 0.25);
+            color: var(--orange);
+        }
+
+        .tcard-ico.ai {
+            background: rgba(0, 81, 162, 0.15);
+            border: 1px solid rgba(0, 81, 162, 0.3);
+            color: #38bdf8;
+        }
+
+        .tcard-ico.analytics {
+            background: rgba(0, 155, 72, 0.15);
+            border: 1px solid rgba(0, 155, 72, 0.3);
+            color: #4ade80;
+        }
+
+        .tcard-title {
+            font-size: 1.25rem;
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 4px;
-            letter-spacing: -0.3px;
+            line-height: 1.3;
         }
 
-        .cert-org {
-            font-size: 0.92rem;
-            font-family: 'JetBrains Mono', monospace;
+        .tcard-org {
+            font: 500 0.86rem 'JetBrains Mono', monospace;
             color: var(--yellow);
-            font-weight: 500;
             margin-bottom: 14px;
         }
 
-        .cert-desc {
-            font-size: 0.95rem;
+        .tcard-desc {
             color: var(--dim);
-            line-height: 1.7;
+            font-size: 0.92rem;
+            line-height: 1.65;
             margin-bottom: 22px;
+            flex: 1;
         }
 
-        .cert-tags {
+        .tcard-tags {
             display: flex;
-            flex-wrap: wrap;
             gap: 8px;
+            flex-wrap: wrap;
+            margin-top: auto;
         }
 
-        .cert-tag {
-            font-size: 0.76rem;
-            font-family: 'JetBrains Mono', monospace;
-            padding: 5px 11px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: var(--text);
-            transition: all 0.25s ease;
+        @media (max-width: 1100px) {
+            .cert-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        .cert-card:hover .cert-tag {
-            border-color: rgba(255, 213, 0, 0.25);
-            background: rgba(255, 255, 255, 0.06);
-            color: #ffffff;
-        }
-
-        /* Connecting Timeline Node */
-        .cert-connector {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 12px 0;
-            width: 100%;
-        }
-
-        .cert-line {
-            width: 2px;
-            height: 28px;
-            background: linear-gradient(180deg, var(--orange) 0%, rgba(255, 213, 0, 0.5) 100%);
-            opacity: 0.6;
-        }
-
-        .cert-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--yellow);
-            box-shadow: 0 0 12px var(--yellow);
-        }
-
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 28px;
-            width: 100%;
-        }
-
-        @media (max-width: 860px) {
-            .cert-grid {
+        @media (max-width: 768px) {
+            .cert-cards-grid {
                 grid-template-columns: 1fr;
             }
-            .cert-card {
-                padding: 26px 22px;
+            .tcard {
+                padding: 24px;
             }
         }
 
@@ -2281,89 +2235,90 @@
         <div class="sec-head up">
             <div class="sec-tag">05 &mdash; Certifications</div>
             <h2 class="sec-title">Certifications & <span>Training</span></h2>
-            <p class="sec-sub">Building practical skills through professional training and hands-on development.</p>
+            <p class="sec-sub">Professional training and practical experience that strengthened my technical foundation.</p>
         </div>
 
-        <div class="cert-container">
-            <!-- Featured Top Card: Full Stack Development -->
-            <div class="cert-card cert-featured up">
-                <div class="cert-top-bar">
-                    <div class="cert-icon-wrap" aria-hidden="true">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="16 18 22 12 16 6"></polyline>
-                            <polyline points="8 6 2 12 8 18"></polyline>
-                        </svg>
-                    </div>
-                    <div class="cert-badge">PRIMARY FOCUS</div>
+        <div class="cert-cards-grid">
+            <!-- Card 1: Full Stack Development -->
+            <div class="tcard tc-primary up">
+                <div class="tcard-top">
+                    <div class="tcard-num">01 / 03</div>
+                    <div class="tcard-badge">PRIMARY FOCUS</div>
                 </div>
-                <h3 class="cert-title">Full Stack Development</h3>
-                <div class="cert-org">Professional Training / Course</div>
-                <p class="cert-desc">Hands-on training in modern full-stack web development covering frontend, backend, databases and API development. Built responsive web applications using HTML, CSS, JavaScript and React, while developing backend functionality with Node.js, Express.js and databases such as MySQL. Applied these concepts to practical full-stack projects.</p>
-                <div class="cert-tags">
-                    <span class="cert-tag" style="border-color:var(--orange);color:var(--orange)">HTML5</span>
-                    <span class="cert-tag" style="border-color:var(--orange);color:var(--orange)">CSS3</span>
-                    <span class="cert-tag" style="border-color:var(--yellow);color:var(--yellow)">JavaScript</span>
-                    <span class="cert-tag" style="border-color:var(--yellow);color:var(--yellow)">React.js</span>
-                    <span class="cert-tag" style="border-color:var(--blue);color:var(--blue)">Node.js</span>
-                    <span class="cert-tag" style="border-color:var(--blue);color:var(--blue)">Express.js</span>
-                    <span class="cert-tag" style="border-color:var(--green);color:var(--green)">MySQL</span>
-                    <span class="cert-tag" style="border-color:var(--red);color:var(--red)">REST APIs</span>
-                    <span class="cert-tag">Git/GitHub</span>
+                <div class="tcard-ico primary" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                    </svg>
+                </div>
+                <h3 class="tcard-title">Full Stack Development</h3>
+                <div class="tcard-org">Professional Training / Course</div>
+                <p class="tcard-desc">Hands-on training in modern full-stack web development covering frontend, backend, database management and REST API development, with practical experience building responsive full-stack web applications.</p>
+                <div class="tcard-tags">
+                    <span class="ptag" style="color:var(--orange);border-color:var(--orange)">HTML5</span>
+                    <span class="ptag" style="color:var(--orange);border-color:var(--orange)">CSS3</span>
+                    <span class="ptag" style="color:var(--yellow);border-color:var(--yellow)">JavaScript</span>
+                    <span class="ptag" style="color:var(--yellow);border-color:var(--yellow)">React.js</span>
+                    <span class="ptag" style="color:var(--blue);border-color:var(--blue)">Node.js</span>
+                    <span class="ptag" style="color:var(--blue);border-color:var(--blue)">Express.js</span>
+                    <span class="ptag" style="color:var(--green);border-color:var(--green)">MySQL</span>
+                    <span class="ptag" style="color:var(--red);border-color:var(--red)">REST APIs</span>
+                    <span class="ptag" style="color:var(--text);border-color:rgba(255,255,255,0.2)">Git/GitHub</span>
                 </div>
             </div>
 
-            <!-- Subtle Connecting Timeline -->
-            <div class="cert-connector" aria-hidden="true">
-                <div class="cert-line"></div>
-                <div class="cert-dot"></div>
+            <!-- Card 2: AI & Data Science -->
+            <div class="tcard tc-ai up">
+                <div class="tcard-top">
+                    <div class="tcard-num">02 / 03</div>
+                </div>
+                <div class="tcard-ico ai" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                        <rect x="9" y="9" width="6" height="6"></rect>
+                        <line x1="9" y1="1" x2="9" y2="4"></line>
+                        <line x1="15" y1="1" x2="15" y2="4"></line>
+                        <line x1="9" y1="20" x2="9" y2="23"></line>
+                        <line x1="15" y1="20" x2="15" y2="23"></line>
+                        <line x1="20" y1="9" x2="23" y2="9"></line>
+                        <line x1="20" y1="15" x2="23" y2="15"></line>
+                        <line x1="1" y1="9" x2="4" y2="9"></line>
+                        <line x1="1" y1="15" x2="4" y2="15"></line>
+                    </svg>
+                </div>
+                <h3 class="tcard-title">AI & Data Science Training</h3>
+                <div class="tcard-org">NASSCOM Foundation</div>
+                <p class="tcard-desc">Completed technical training covering Python, data processing and foundational machine-learning concepts, with practical exposure to working with datasets and commonly used Python libraries.</p>
+                <div class="tcard-tags">
+                    <span class="ptag" style="color:var(--yellow);border-color:var(--yellow)">Python</span>
+                    <span class="ptag" style="color:var(--text);border-color:rgba(255,255,255,0.2)">NumPy</span>
+                    <span class="ptag" style="color:var(--text);border-color:rgba(255,255,255,0.2)">Pandas</span>
+                    <span class="ptag" style="color:var(--text);border-color:rgba(255,255,255,0.2)">Scikit-learn</span>
+                    <span class="ptag" style="color:var(--text);border-color:rgba(255,255,255,0.2)">PyTorch</span>
+                </div>
             </div>
 
-            <!-- Secondary Cards 2-Column Grid -->
-            <div class="cert-grid">
-                <!-- Card 2: AI & Data Science Training -->
-                <div class="cert-card up">
-                    <div class="cert-top-bar">
-                        <div class="cert-icon-wrap ai" aria-hidden="true">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <path d="M12 8v8"></path>
-                                <path d="M8 12h8"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <h3 class="cert-title">AI & Data Science Training</h3>
-                    <div class="cert-org">NASSCOM Foundation</div>
-                    <p class="cert-desc">Completed technical training covering the fundamentals of Python, data processing and machine learning. Gained practical exposure to working with datasets, Python libraries and foundational AI/Data Science concepts.</p>
-                    <div class="cert-tags">
-                        <span class="cert-tag" style="border-color:var(--yellow);color:var(--yellow)">Python</span>
-                        <span class="cert-tag">NumPy</span>
-                        <span class="cert-tag">Pandas</span>
-                        <span class="cert-tag">Scikit-learn</span>
-                        <span class="cert-tag">PyTorch</span>
-                    </div>
+            <!-- Card 3: Data Analytics Internship -->
+            <div class="tcard tc-analytics up">
+                <div class="tcard-top">
+                    <div class="tcard-num">03 / 03</div>
                 </div>
-
-                <!-- Card 3: Data Analytics Internship -->
-                <div class="cert-card up">
-                    <div class="cert-top-bar">
-                        <div class="cert-icon-wrap analytics" aria-hidden="true">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="18" y1="20" x2="18" y2="10"></line>
-                                <line x1="12" y1="20" x2="12" y2="4"></line>
-                                <line x1="6" y1="20" x2="6" y2="14"></line>
-                            </svg>
-                        </div>
-                    </div>
-                    <h3 class="cert-title">Data Analytics Internship</h3>
-                    <div class="cert-org">VTricks Technologies</div>
-                    <p class="cert-desc">Gained practical experience working with business data, SQL queries, data visualization and dashboard development. Worked with tools including Power BI, Excel and databases to transform raw data into meaningful business insights.</p>
-                    <div class="cert-tags">
-                        <span class="cert-tag" style="border-color:var(--yellow);color:var(--yellow)">Power BI</span>
-                        <span class="cert-tag" style="border-color:var(--green);color:var(--green)">SQL</span>
-                        <span class="cert-tag">Advanced Excel</span>
-                        <span class="cert-tag">DAX</span>
-                        <span class="cert-tag">Data Visualization</span>
-                    </div>
+                <div class="tcard-ico analytics" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                </div>
+                <h3 class="tcard-title">Data Analytics Internship</h3>
+                <div class="tcard-org">VTricks Technologies</div>
+                <p class="tcard-desc">Gained practical experience with SQL, business data analysis, dashboard development and data visualization using Power BI, Excel and database tools.</p>
+                <div class="tcard-tags">
+                    <span class="ptag" style="color:var(--yellow);border-color:var(--yellow)">Power BI</span>
+                    <span class="ptag" style="color:var(--green);border-color:var(--green)">SQL</span>
+                    <span class="ptag" style="color:var(--text);border-color:rgba(255,255,255,0.2)">Advanced Excel</span>
+                    <span class="ptag" style="color:var(--text);border-color:rgba(255,255,255,0.2)">DAX</span>
+                    <span class="ptag" style="color:var(--text);border-color:rgba(255,255,255,0.2)">Data Visualization</span>
                 </div>
             </div>
         </div>
