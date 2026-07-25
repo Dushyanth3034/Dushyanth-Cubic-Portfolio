@@ -769,31 +769,178 @@
             gap: 40px;
         }
 
-        .about-photo {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid rgba(255, 213, 0, 0.3);
-            box-shadow: 0 0 40px rgba(255, 213, 0, 0.2);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: var(--bg);
+        /* ── HANGING ID BADGE ── */
+        .hanging-badge-area {
+            position: relative;
+            width: 260px;
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            overflow: visible;
+            margin: 0 auto;
+        }
+
+        .badge-hanging-assembly {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform-origin: top center;
+            animation: idCardPendulum 6s ease-in-out infinite;
+            will-change: transform;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .badge-hanging-assembly:active {
+            cursor: grabbing;
+        }
+
+        /* Lanyard Strap coming down from top */
+        .lanyard-strap {
+            width: 14px;
+            height: 85px;
+            background: linear-gradient(90deg, #111116 0%, #2a2a35 30%, #4a4a5a 50%, #2a2a35 70%, #111116 100%);
+            border-left: 1px solid rgba(255, 88, 0, 0.4);
+            border-right: 1px solid rgba(255, 88, 0, 0.4);
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .lanyard-strap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(255, 88, 0, 0.15) 4px, rgba(255, 88, 0, 0.15) 6px);
+        }
+
+        /* Metallic Swivel Clip */
+        .lanyard-clip {
+            width: 30px;
+            height: 22px;
+            background: linear-gradient(135deg, #d4d4d8 0%, #71717a 40%, #a1a1aa 70%, #3f3f46 100%);
+            border-radius: 4px;
+            position: relative;
+            z-index: 3;
+            margin-top: -2px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .about-photo img {
+        .lanyard-clip::before {
+            content: '';
+            width: 12px;
+            height: 6px;
+            background: #18181b;
+            border-radius: 2px;
+        }
+
+        /* ID Card Surface */
+        .id-badge-card {
+            width: 220px;
+            background: linear-gradient(145deg, rgba(24, 24, 30, 0.96), rgba(14, 14, 18, 0.98));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 3px solid var(--orange);
+            border-radius: 18px;
+            padding: 16px 14px 18px 14px;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 88, 0, 0.12);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            margin-top: -4px;
+            backdrop-filter: blur(10px);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .id-badge-card::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            width: 36px;
+            height: 8px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .id-card-photo {
+            width: 125px;
+            height: 135px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 213, 0, 0.35);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+            margin-bottom: 12px;
+            background: var(--bg);
+        }
+
+        .id-card-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center 20%;
         }
 
-        .about-photo:hover {
-            transform: scale(1.05) rotate(3deg);
-            border-color: var(--yellow);
-            box-shadow: 0 0 60px rgba(255, 213, 0, 0.3);
+        .id-card-name {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2px;
+            letter-spacing: -0.2px;
+        }
+
+        .id-card-role {
+            font: 600 0.76rem 'JetBrains Mono', monospace;
+            color: var(--yellow);
+            margin-bottom: 10px;
+        }
+
+        .id-card-status {
+            font: 600 0.68rem 'JetBrains Mono', monospace;
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.12);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            padding: 3px 10px;
+            border-radius: 100px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .id-status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 8px #4ade80;
+            animation: pulseDot 2s infinite;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        @keyframes idCardPendulum {
+            0% { transform: rotate(-2.5deg); }
+            25% { transform: rotate(2.2deg); }
+            50% { transform: rotate(-1.8deg); }
+            75% { transform: rotate(1.5deg); }
+            100% { transform: rotate(-2.5deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .badge-hanging-assembly {
+                animation: none !important;
+                transform: rotate(0deg) !important;
+            }
         }
 
         .about-stats-container {
@@ -1833,10 +1980,23 @@
                 </div>
             </div>
 
-            <!-- Right Side: Photo + Stats -->
+            <!-- Right Side: Hanging ID Badge + Stats -->
             <div class="about-right-col up">
-                <div class="about-photo">
-                    <img src="dushyanth-profile.png" alt="Dushyanth Kumar" loading="lazy">
+                <div class="hanging-badge-area" id="hangingBadgeArea">
+                    <div class="badge-hanging-assembly" id="badgeAssembly">
+                        <div class="lanyard-strap"></div>
+                        <div class="lanyard-clip"></div>
+                        <div class="id-badge-card">
+                            <div class="id-card-photo">
+                                <img src="dushyanth-profile.png" alt="Dushyanth Kumar" loading="lazy">
+                            </div>
+                            <div class="id-card-name">Dushyanth Kumar</div>
+                            <div class="id-card-role">Full Stack Developer</div>
+                            <div class="id-card-status">
+                                <span class="id-status-dot"></span> Available to Work
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="about-stats-wrapper">
                     <div class="stats">
@@ -2902,12 +3062,101 @@
         const navLinks = document.querySelectorAll('.nav-links a');
         window.addEventListener('scroll', () => {
             let cur2 = '';
-            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur2 = s.id; });
+        sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur2 = s.id; });
             navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur2));
         }, { passive: true });
 
 
+        // ══════════════════════════════════════════════════
+        //  HANGING ID BADGE PHYSICS INTERACTION
+        // ══════════════════════════════════════════════════
+        (function initHangingBadgePhysics() {
+            const area = document.getElementById('hangingBadgeArea');
+            const badge = document.getElementById('badgeAssembly');
+            if (!area || !badge) return;
+
+            let currentAngle = 0;
+            let targetAngle = 0;
+            let isDragging = false;
+            let startX = 0;
+            let dragAngle = 0;
+            let animFrameId = null;
+            let mouseTimeout = null;
+
+            function updatePhysics() {
+                // Smooth spring dampening towards targetAngle
+                currentAngle += (targetAngle - currentAngle) * 0.08;
+
+                if (Math.abs(currentAngle) > 0.05 || Math.abs(targetAngle) > 0.05 || isDragging) {
+                    badge.style.transform = `rotate(${currentAngle}deg)`;
+                    badge.style.animationPlayState = 'paused';
+                    animFrameId = requestAnimationFrame(updatePhysics);
+                } else {
+                    // Resume natural CSS pendulum sway when physics settles
+                    badge.style.transform = '';
+                    badge.style.animationPlayState = 'running';
+                    animFrameId = null;
+                }
+            }
+
+            function triggerSwing(angle) {
+                targetAngle = Math.max(-12, Math.min(12, angle));
+                if (!animFrameId) {
+                    animFrameId = requestAnimationFrame(updatePhysics);
+                }
+            }
+
+            // Mouse hover swing effect
+            area.addEventListener('mousemove', e => {
+                if (isDragging) return;
+                const rect = area.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const offsetX = e.clientX - centerX;
+                // Calculate swing angle based on mouse distance from center
+                const swing = (offsetX / (rect.width / 2)) * 8;
+                triggerSwing(swing);
+
+                clearTimeout(mouseTimeout);
+                mouseTimeout = setTimeout(() => {
+                    targetAngle = 0;
+                }, 800);
+            });
+
+            area.addEventListener('mouseleave', () => {
+                if (isDragging) return;
+                targetAngle = 0;
+            });
+
+            // Drag / Push interaction
+            function onDragStart(e) {
+                isDragging = true;
+                startX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+                dragAngle = currentAngle;
+                badge.style.animationPlayState = 'paused';
+            }
+
+            function onDragMove(e) {
+                if (!isDragging) return;
+                const clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+                const deltaX = clientX - startX;
+                targetAngle = Math.max(-15, Math.min(15, dragAngle + deltaX * 0.12));
+                if (!animFrameId) animFrameId = requestAnimationFrame(updatePhysics);
+            }
+
+            function onDragEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                targetAngle = 0;
+            }
+
+            badge.addEventListener('mousedown', onDragStart);
+            window.addEventListener('mousemove', onDragMove);
+            window.addEventListener('mouseup', onDragEnd);
+
+            badge.addEventListener('touchstart', onDragStart, { passive: true });
+            window.addEventListener('touchmove', onDragMove, { passive: true });
+            window.addEventListener('touchend', onDragEnd);
+        })();
     </script>
 </body>
-
 </html>
