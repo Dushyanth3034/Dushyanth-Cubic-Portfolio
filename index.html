@@ -1129,22 +1129,52 @@
             color: var(--dim);
             font-size: .92rem;
             line-height: 1.65;
-            margin-bottom: 22px;
+            margin-bottom: 18px;
+        }
+
+        .proj-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            width: 100%;
         }
 
         .proj-link {
             color: var(--yellow);
             text-decoration: none;
             font-weight: 600;
-            font-size: .92rem;
+            font-size: .84rem;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            transition: gap .2s;
+            gap: 4px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: rgba(255, 213, 0, 0.08);
+            border: 1px solid rgba(255, 213, 0, 0.25);
+            transition: all .2s ease;
         }
 
         .proj-link:hover {
-            gap: 10px;
+            background: rgba(255, 213, 0, 0.18);
+            border-color: var(--yellow);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .proj-link-gh {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .proj-link-gh:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.35);
+            color: #ffffff;
+            transform: translateY(-2px);
         }
 
         .p1 .proj-f {
@@ -2102,7 +2132,13 @@
                     </div>
                     <div class="proj-bk">
                         <div class="proj-desc">A full-stack pet marketplace and services platform connecting buyers, sellers and pet-service providers. Includes role-based dashboards, product purchasing, service booking, payments, seller/provider management, admin functionality and real-time features.</div>
-                        <a href="https://pawmart-beta.vercel.app" class="proj-link" target="_blank" rel="noopener noreferrer">View Live &rarr;</a>
+                        <div class="proj-links">
+                            <a href="https://pawmart-beta.vercel.app" class="proj-link" target="_blank" rel="noopener noreferrer">Live Demo &nearr;</a>
+                            <a href="https://github.com/Dushyanth3034/PawMart" class="proj-link proj-link-gh" target="_blank" rel="noopener noreferrer">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                GitHub Code &nearr;
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2126,7 +2162,13 @@
                     </div>
                     <div class="proj-bk">
                         <div class="proj-desc">A modern social messaging web application featuring real-time-style chat experiences, contacts, stories/moments, profiles, authentication and a guest demo mode. Built with a responsive interface for desktop and mobile devices.</div>
-                        <a href="https://we-chat-taupe.vercel.app" class="proj-link" target="_blank" rel="noopener noreferrer">View Live &rarr;</a>
+                        <div class="proj-links">
+                            <a href="https://we-chat-taupe.vercel.app" class="proj-link" target="_blank" rel="noopener noreferrer">Live Demo &nearr;</a>
+                            <a href="https://github.com/Dushyanth3034/We-Chat" class="proj-link proj-link-gh" target="_blank" rel="noopener noreferrer">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                GitHub Code &nearr;
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2150,7 +2192,13 @@
                     </div>
                     <div class="proj-bk">
                         <div class="proj-desc">A full-stack analytics dashboard designed to analyze large-scale restaurant sales data. Provides interactive business insights, sales metrics, filtering and data visualizations through a responsive dashboard interface.</div>
-                        <a href="https://california-buritto-analytical-dashb.vercel.app" class="proj-link" target="_blank" rel="noopener noreferrer">View Live &rarr;</a>
+                        <div class="proj-links">
+                            <a href="https://california-buritto-analytical-dashb.vercel.app" class="proj-link" target="_blank" rel="noopener noreferrer">Live Demo &nearr;</a>
+                            <a href="https://github.com/Dushyanth3034/California-buritto-Analytical-Dashboard" class="proj-link proj-link-gh" target="_blank" rel="noopener noreferrer">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                GitHub Code &nearr;
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2173,7 +2221,13 @@
                     </div>
                     <div class="proj-bk">
                         <div class="proj-desc">A premium responsive college landing page featuring modern UI/UX, smooth animations, responsive navigation, engaging content sections and a polished mobile experience.</div>
-                        <a href="https://fullinfaws-college-premium-landing.vercel.app" class="proj-link" target="_blank" rel="noopener noreferrer">View Live &rarr;</a>
+                        <div class="proj-links">
+                            <a href="https://fullinfaws-college-premium-landing.vercel.app" class="proj-link" target="_blank" rel="noopener noreferrer">Live Demo &nearr;</a>
+                            <a href="https://github.com/Dushyanth3034/Fullinfaws-College-Premium-Landing-Page" class="proj-link proj-link-gh" target="_blank" rel="noopener noreferrer">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                GitHub Code &nearr;
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2195,7 +2249,13 @@
                     </div>
                     <div class="proj-bk">
                         <div class="proj-desc">A comprehensive movie platform for exploring and discovering films.</div>
-                        <a href="https://dushyanth3034.github.io/Cine-Versa/" class="proj-link" target="_blank" rel="noopener noreferrer">View Live &rarr;</a>
+                        <div class="proj-links">
+                            <a href="https://dushyanth3034.github.io/Cine-Versa/" class="proj-link" target="_blank" rel="noopener noreferrer">Live Demo &nearr;</a>
+                            <a href="https://github.com/Dushyanth3034/Cine-Versa" class="proj-link proj-link-gh" target="_blank" rel="noopener noreferrer">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                GitHub Code &nearr;
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2217,7 +2277,12 @@
                     </div>
                     <div class="proj-bk">
                         <div class="proj-desc">A comprehensive SQL-based system for managing student course enrollments.</div>
-                        <a href="https://github.com/Dushyanth3034/Student-Course-Enrollment-System/tree/main" class="proj-link" target="_blank" rel="noopener noreferrer">View Code &rarr;</a>
+                        <div class="proj-links">
+                            <a href="https://github.com/Dushyanth3034/Student-Course-Enrollment-System" class="proj-link proj-link-gh" target="_blank" rel="noopener noreferrer">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                GitHub Code &nearr;
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
