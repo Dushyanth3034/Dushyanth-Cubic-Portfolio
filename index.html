@@ -447,6 +447,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            transform: translateX(35px);
         }
 
         .cube-aura {
@@ -474,9 +475,9 @@
 
         /* ── 3D RUBIK'S CUBE ── */
         .cube-viewport {
-            width: 340px;
-            height: 340px;
-            perspective: 1100px;
+            width: 295px;
+            height: 295px;
+            perspective: 1000px;
             perspective-origin: 50% 50%;
             display: flex;
             align-items: center;
@@ -499,18 +500,18 @@
         /* Each small cubie */
         .cubie {
             position: absolute;
-            width: 82px;
-            height: 82px;
-            margin: -41px 0 0 -41px;
+            width: 72px;
+            height: 72px;
+            margin: -36px 0 0 -36px;
             transform-style: preserve-3d;
         }
 
         .cubie-face {
             position: absolute;
-            width: 82px;
-            height: 82px;
-            border-radius: 11px;
-            border: 3.5px solid #050505;
+            width: 72px;
+            height: 72px;
+            border-radius: 9px;
+            border: 3px solid #050505;
             backface-visibility: visible;
         }
 
@@ -2660,10 +2661,10 @@
         // ══════════════════════════════════════════════════
         //  3D RUBIK'S CUBE — FULL 27-CUBIE SYSTEM
         // ══════════════════════════════════════════════════
-        const CUBIE_PX = 82;
+        const CUBIE_PX = 72;
         const GAP_PX = 0;
-        const HALF_PX = 41;
-        const STEP_PX = 82;
+        const HALF_PX = 36;
+        const STEP_PX = 72;
 
         const FC = {
             front: { bg: '#009B48', cls: 'fc-green' },
